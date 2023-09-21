@@ -145,6 +145,7 @@ pub struct Config {
     deploy_generation: Option<u64>,
     system_parameter_defaults: BTreeMap<String, String>,
     concurrent_webhook_req_count: Option<usize>,
+    internal_console_redirect_url: Option<String>,
 }
 
 impl Default for Config {
@@ -167,6 +168,7 @@ impl Default for Config {
             deploy_generation: None,
             system_parameter_defaults: BTreeMap::new(),
             concurrent_webhook_req_count: None,
+            internal_console_redirect_url: None,
         }
     }
 }
@@ -264,6 +266,14 @@ impl Config {
 
     pub fn with_concurrent_webhook_req_count(mut self, limit: usize) -> Self {
         self.concurrent_webhook_req_count = Some(limit);
+        self
+    }
+
+    pub fn with_internal_console_redirect_url(
+        mut self,
+        internal_console_redirect_url: Option<String>,
+    ) -> Self {
+        self.internal_console_redirect_url = internal_console_redirect_url;
         self
     }
 }
@@ -462,6 +472,7 @@ impl Listeners {
                     bootstrap_role: config.bootstrap_role,
                     deploy_generation: config.deploy_generation,
                     http_host_name: Some(host_name),
+                    internal_console_redirect_url: config.internal_console_redirect_url,
                 })
                 .await
         })?;
