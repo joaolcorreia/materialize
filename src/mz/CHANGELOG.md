@@ -3,6 +3,14 @@
 All notable changes to the `mz` CLI will be documented in this file.
 
 
+## [0.2.2] - 2023-09-21
+
+This version implements a change to use a new API version '1' of the Region API
+
+### Changed
+ - The command `mz region enable` was updated to use the newly introduced `regionState` field returned from the Region API to display more informative loading states
+ - The command `mz region list` was updated to use the new API response semantics of the Region API in version 1
+
 ## [0.2.1] - 2023-09-07
 
 This version only implements changes in the release process.
